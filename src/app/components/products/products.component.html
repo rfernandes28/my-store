@@ -1,0 +1,22 @@
+<p>{{'Fecha:' | uppercase }}{{ today | date:'short' }}</p>
+
+<p>Tiempo pasado {{ today | timeAgo }}</p>
+<p>Cantidad de productos: {{ myShoppingCart.length }}</p>
+
+<p>Precio total $ {{ total }}</p>
+<div class="products--grid">
+  <app-product
+    [product]="product"
+    *ngFor="let product of products"
+    (addedProduct)="onAddToShoppingCart($event)"
+  ></app-product>
+</div>
+
+<!--
+Si vamos a estar conociendo los pipes(|)debemos empezar por definirlos, un Pipe es una función pura,
+o sea, una función que dado un determinado valor siempre devolverá el mismo resultado.
+
+Los Pipes no modifican el valor de un dato, simplemente le cambian el aspecto visual,
+Angular utiliza el concepto de Pipes para la transformación de datos.
+
+ -->
