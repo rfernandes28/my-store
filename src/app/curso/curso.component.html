@@ -1,0 +1,291 @@
+<!-- String interpolation  {{ variable }} -->
+<h1>Hola mundo</h1>
+
+<h2>{{ "Hola Mundo ".repeat(3) }}</h2>
+
+<P> 3 + 3 = {{ 3 + 3 }}</P>
+
+<h3>Hola, soy {{ name }} y tengo {{ age }}</h3>
+
+<img src="{{ img }}" alt="random" style="width: 100px; height: 100px" />
+
+<hr />
+<!-- fin -->
+
+<!-- Property Binding [] -->
+<h1>Propiedades</h1>
+<button [disabled]="btnDisabled">Enviar</button>
+
+<input type="text" [value]="name" />
+
+<progress max="100" [value]="age"></progress>
+
+<img [src]="img" alt="random" style="width: 100px; height: 100px" />
+
+<input type="text" [value]="person.name" />
+
+<hr />
+<!-- fin -->
+
+<!-- Event Binding () -->
+<h1>Eventos</h1>
+<button [disabled]="btnDisabled">Enviar</button>
+
+<button (click)="toggleButton()">Toggle Button</button>
+
+<p>Edad {{ person.age }}</p>
+
+<button (click)="increaseAge()">Age ++</button>
+
+<progress max="100" [value]="person.age"></progress>
+
+<input type="text" [value]="name" (keyup)="onKeyUp($event)" />
+
+<p>{{ person.name }}</p>
+
+<div class="box" (scroll)="onScroll($event)">
+  <p>
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae tempore
+    doloremque aspernatur praesentium ducimus possimus nostrum provident amet,
+    qui a nisi blanditiis nam molestias laudantium quas cupiditate quis. Animi,
+    sit. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae
+    tempore doloremque aspernatur praesentium ducimus possimus nostrum provident
+    amet, qui a nisi blanditiis nam molestias laudantium quas cupiditate quis.
+    Animi, sit. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae
+    tempore doloremque aspernatur praesentium ducimus possimus nostrum provident
+    amet, qui a nisi blanditiis nam molestias laudantium quas cupiditate quis.
+    Animi, sit.
+  </p>
+</div>
+<hr />
+
+<!-- fin -->
+
+<!--ngModel -->
+
+<input
+  type="text"
+  required="true"
+  #nameInput="ngModel"
+  [(ngModel)]="person.name"
+/>
+
+<p>Valid: {{ nameInput.valid }}</p>
+
+<input
+  type="number"
+  max="70"
+  min="50"
+  required="true"
+  #ageInput="ngModel"
+  [(ngModel)]="person.age"
+/>
+
+<p>Valid age: {{ ageInput.valid }}</p>
+<hr />
+<!-- fin -->
+
+<!--*ngIf -->
+<h1>*ngIf</h1>
+<input type="text" required="true" [(ngModel)]="person.name" />
+
+<p *ngIf="person.name === 'hola'; else elseBlock">Mi contenido</p>
+
+<ng-template #elseBlock>
+  <p>Bloque de else</p>
+</ng-template>
+
+<hr />
+
+<!-- fin -->
+
+<!--*ngFor -->
+<h1>*ngFor</h1>
+
+<input type="text" [(ngModel)]="newName" />
+<button (click)="addName()">Add name</button>
+
+<ul>
+  <li *ngIf="emojis.length === 0">No hay elementos</li>
+  <li *ngFor="let emoji of emojis; index as i">
+    {{ i }} {{ emoji }}
+    <button (click)="deleteName(i)">Delete</button>
+  </li>
+</ul>
+
+<hr />
+
+<!-- fin -->
+
+<!--*ngFor Objs -->
+<h1>*ngFor Objs</h1>
+
+<div class="products--grid">
+  <div *ngFor="let product of productsEJ">
+    <img [src]="product.image" alt="image" />
+    <h2>{{ product.price }}</h2>
+    <p>{{ product.title }}</p>
+  </div>
+</div>
+
+<hr />
+
+<!-- fin -->
+
+<!--ngSwitch -->
+<h1>ngSwitch</h1>
+
+<input type="text" required="true" [(ngModel)]="person.name" />
+
+<div [ngSwitch]="person.name">
+  <p *ngSwitchCase="'Ricardo'">La persona es Ricardo</p>
+
+  <p *ngSwitchCase="'Jose'">La persona es Jose</p>
+
+  <p *ngSwitchDefault>No hace match</p>
+</div>
+
+<hr />
+
+<!-- fin -->
+
+<!--Class and style -->
+<h1>Class & Style</h1>
+
+<input
+  type="text"
+  required="true"
+  #nameInput2="ngModel"
+  [(ngModel)]="person.name"
+/>
+
+<p class="message-error" [class.invalid]="nameInput2.invalid">
+  El campo es requerido
+</p>
+
+<label> Nombre</label>
+
+<input
+  type="text"
+  required="true"
+  #nameInput3="ngModel"
+  [(ngModel)]="person.name"
+/>
+
+<p [style.font-style]="nameInput3.invalid ? 'italic' : 'normal'">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam alias culpa
+  voluptatum quidem molestiae provident ipsum delectus, saepe animi accusantium
+  itaque eaque facilis, cumque veniam officiis aut quaerat, nam voluptate.
+</p>
+<div class="two-column">
+  <div>
+    <input type="text" [(ngModel)]="widthImg" />
+  </div>
+  <div>
+    <img [style.width.px]="widthImg" [src]="productsEJ[0].image" alt="image" />
+  </div>
+</div>
+<hr />
+
+<!-- fin -->
+
+<!--ngClass & ngStyle -->
+<h1>ngClass & ngStyle</h1>
+
+<input
+  type="text"
+  required="true"
+  #nameInput4="ngModel"
+  [(ngModel)]="person.name"
+/>
+
+<hr
+  class="line-error"
+  [ngClass]="{
+    valid: nameInput4.valid,
+    invalid: nameInput4.invalid
+  }"
+/>
+
+<p class="message-error" [class.invalid]="nameInput4.invalid">
+  El campo es requerido
+</p>
+
+<div class="two-column">
+  <div>
+    <input type="number" [(ngModel)]="box.width" />
+    <input type="number" [(ngModel)]="box.height" />
+    <input type="color" [(ngModel)]="box.background" />
+  </div>
+
+  <div>
+    <div
+      [ngStyle]="{
+        'width.px': box.width,
+        'height.px': box.height,
+        'background-color': box.background,
+        display: 'block'
+      }"
+    ></div>
+  </div>
+</div>
+
+<hr />
+
+<!-- fin -->
+
+<!--Formularios -->
+<h1>Formularios</h1>
+
+<form (ngSubmit)="onRegister()" #myForm="ngForm">
+  <div class="input-group">
+    <label for="name"> Nombre</label>
+    <input
+      type="text"
+      name="name"
+      required
+      id="name"
+      [(ngModel)]="register.name"
+    />
+    <p>Mensaje de error</p>
+  </div>
+  <div class="input-group">
+    <label for="email"> Email</label>
+    <input
+      type="email"
+      name="email"
+      required
+      id="email"
+      [(ngModel)]="register.email"
+    />
+    <p>Mensaje de error</p>
+  </div>
+  <div class="input-group">
+    <label for="password"> Password</label>
+    <input
+      type="password"
+      name="password"
+      required
+      id="password"
+      [(ngModel)]="register.password"
+    />
+    <p>Mensaje de error</p>
+  </div>
+  <button [disabled]="myForm.invalid" type="submit">Registrar</button>
+</form>
+
+<hr />
+
+<!-- fin -->
+
+<!--Componentes -->
+<h1>Componentes</h1>
+<input type="text" [(ngModel)]="imgParent" />
+
+<button (click)="toggleImg()">Toggle Img</button>
+
+<p>{{ showImg }}</p>
+<app-img *ngIf="showImg" (loaded)="onLoaded($event)" [img]="imgParent">
+</app-img>
+
+<!-- fin -->
