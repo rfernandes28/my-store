@@ -1,9 +1,20 @@
+export interface Category {
+  id: string;
+  name: string;
+}
+
 export interface Product {
-  id:string,
+  id: string;
   title: string;
   price: number;
-  image: string;
-  category?: string;
+  images: string[];
+  category: Category;
   description?: string;
-
+  taxes?: number;
 }
+
+export interface CreateProductDTO extends Omit<Product, 'id' | 'category'> {
+  categoryId: number;
+}
+
+export interface UpdateProductDTO extends Partial<CreateProductDTO> {}

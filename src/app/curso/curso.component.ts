@@ -28,38 +28,61 @@ export class CursoComponent {
       id: '1',
       title: 'EL mejor juguete',
       price: 565,
-      image: './assets/images/toy.jpg',
-      category: 'all',
+      images: ['./assets/images/toy.jpg'],
+      category: {
+        id: '1',
+        name: 'a',
+      },
     },
     {
       id: '2',
       title: 'Bicicleta casi nueva',
       price: 356,
-      image: './assets/images/bike.jpg',
+      images: ['./assets/images/bike.jpg'],
+      category: {
+        id: '1',
+        name: 'a',
+      },
     },
     {
       id: '3',
       title: 'Colleción de albumnes',
       price: 34,
-      image: './assets/images/album.jpg',
+      images: ['./assets/images/album.jpg'],
+      category: {
+        id: '1',
+        name: 'a',
+      },
     },
     {
       id: '4',
       title: 'Mis libros',
       price: 23,
-      image: './assets/images/books.jpg',
+      images: ['./assets/images/books.jpg'],
+      category: {
+        id: '1',
+        name: 'a',
+      },
     },
     {
       id: '5',
       title: 'Casa para perro',
       price: 34,
-      image: './assets/images/house.jpg',
+      images: ['./assets/images/house.jpg'],
+      category: {
+        id: '1',
+        name: 'a',
+      },
     },
     {
       id: '6',
       title: 'Gafas',
       price: 3434,
-      image: './assets/images/glasses.jpg',
+      images: ['./assets/images/glasses.jpg'],
+      category: {
+        id: '1',
+        name: 'a',
+      },
     },
   ];
 
@@ -88,12 +111,12 @@ export class CursoComponent {
 
   onScroll(event: Event) {
     const element = event.target as HTMLElement;
-    console.log(element.scrollTop);
+    // console.log(element.scrollTop);
   }
 
   onKeyUp(event: Event) {
     const element = event.target as HTMLInputElement;
-    console.log(element.value);
+    // console.log(element.value);
     this.person.name = element.value;
   }
 
@@ -107,16 +130,16 @@ export class CursoComponent {
   }
 
   onRegister() {
-    console.log(this.register);
+    // console.log(this.register);
   }
 
   onLoaded(img: string) {
-    console.log('loaded padre:', img);
+    // console.log('loaded padre:', img);
   }
 
-  showImg=true
+  showImg = true;
 
-  toggleImg(){
-    this.showImg = !this.showImg
+  toggleImg() {
+    this.showImg = !this.showImg;
   }
 }

@@ -25,7 +25,7 @@ export class ImgComponent
   public set changeImg(newImg: string) {
     this.img = newImg;
     // se puede ejecutar codigo cuando cambie este input especifico
-    console.log('cambio de img>>>', this.img);
+   // console.log('cambio de img>>>', this.img);
 
   }
 
@@ -42,7 +42,7 @@ export class ImgComponent
     // antes del render
     // no correr async
     // corre una sola vez por instancia
-    console.log('soy constructor', 'imageDefault>>', this.imageDefault);
+//console.log('soy constructor', 'imageDefault>>', this.imageDefault);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -50,7 +50,7 @@ export class ImgComponent
     // actualiza cambios de los inputs
     // corre muchas veces
 
-    console.log('soy ngOnChanges', 'imageDefault>>', this.imageDefault);
+   // console.log('soy ngOnChanges', 'imageDefault>>', this.imageDefault);
     console.log('changes>>', changes);
     //SimpleChanges llegan todos los cambios de los inputs
   }
@@ -85,7 +85,7 @@ export class ImgComponent
   }
 
   imgLoaded() {
-    console.log('Loaded');
+    // console.log('Loaded');
     this.loaded.emit(this.img);
   }
 }

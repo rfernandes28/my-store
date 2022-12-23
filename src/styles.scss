@@ -4,9 +4,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 
+@import 'swiper/scss';
+@import 'swiper/scss/navigation';
+@import 'swiper/scss/pagination';
+
 * {
   font-family: 'Quicksand', sans-serif;
 }
+
 .products--grid {
   app-img {
     img {
