@@ -18,7 +18,7 @@ import {
   providedIn: 'root',
 })
 export class ProductsService {
-  private apiUrl = `${environment.API_URL}/api`;
+  private apiUrl = `${environment.API_URL_TEST}/api`;
   constructor(private http: HttpClient) {}
 
   getAllProducts(limit?: number, offset?: number) {
@@ -32,6 +32,30 @@ export class ProductsService {
       .get<Product[]>(`${this.apiUrl}/products`, {
         params,
         context: checkTime(),
+      })
+      .pipe(
+        retry(3),
+        map((products) =>
+          products.map((item) => {
+            return {
+              ...item,
+              taxes: 0.19 * item.price,
+            };
+          })
+        )
+      );
+  }
+
+  getByCategory(categotyId: string, limit?: number, offset?: number) {
+    let params = new HttpParams();
+
+    if (limit && offset !== undefined) {
+      params = params.set('limit', limit);
+      params = params.set('offset', offset);
+    }
+    return this.http
+      .get<Product[]>(`${this.apiUrl}/categories/${categotyId}/products`, {
+        params,
       })
       .pipe(
         retry(3),
