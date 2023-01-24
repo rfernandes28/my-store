@@ -16,7 +16,7 @@ interface File {
 export class FilesService {
   constructor(private http: HttpClient) {}
 
-  private apiUrl = `${environment.API_URL}/api`;
+  private apiUrl = `${environment.API_URL_TEST}/api`;
 
   getFile(name: string, url: string, type: string) {
     return this.http.get(url, { responseType: 'blob' }).pipe(

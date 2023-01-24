@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { FilesService } from './services/files.service';
+import { TokenService } from './services/token.service';
 import { UsersService } from './services/users.service';
 
 @Component({
@@ -8,15 +9,23 @@ import { UsersService } from './services/users.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   token = '';
   imagen = '';
 
   constructor(
     private authService: AuthService,
+    private tokenService: TokenService,
     private userService: UsersService,
     private filesService: FilesService
   ) {}
+
+  ngOnInit(): void {
+    const token = this.tokenService.getToken()
+    if(token){
+      this.authService.profile().subscribe()
+    }
+  }
 
   createUser() {
     this.userService
