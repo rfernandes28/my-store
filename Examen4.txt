@@ -1,0 +1,53 @@
+1.
+¿Cuál componente agregamos en AppComponent para que Angular reconozca las rutas y renderice los componentes declarados en el AppRouting?
+
+router-outlet
+2.
+¿Cuál es la función que cumple el atributo redirectTo cuando declaramos las rutas?
+
+Tiene un path que si hace match lo redirecciona a otra ruta
+3.
+¿Cuál es la sintaxis correcta para definir un parámetro dentro de una ruta de Angular?
+category/:id
+4.
+¿Cuál servicio nos toca inyectar para poder obtener los parámetros de una ruta?
+ActivatedRoute
+5.
+¿Qué operador de rxjs podríamos usar para evitar un callback hell cuando recibimos parámetros y luego queremos hacer peticiones?
+
+switchMap
+6.
+¿Cuál es la función de la directiva routerLinkActive?
+Pone una clase al elemento si hace match con la ruta en la que se encuentra el usuario
+7.
+¿Cuál es el patrón que debemos colocar para declarar un componente cuando la ruta no es encontrada y genera un 404 not found?
+
+path: '**'
+8.
+¿Cuál servicio nos toca inyectar para poder obtener hacer la funcionalidad de ir a la ruta previa?
+Location
+9.
+¿Cuál método del ActivatedRoute nos sirve para leer los parámetros tipo Query?
+
+this.route.queryParamMap
+
+10.
+¿Cuál método del ActivatedRoute nos sirve para leer los parámetros en la ruta?
+
+this.route.paramMap
+
+11.
+Con Code Spliting podemos partir nuestra aplicación en varios chunks de JS
+Verdadero
+12.
+¿Cuál es decorador que usamos para declarar un módulo?
+@NgModule
+13.
+¿Cuál attr nos sirve en el routing para definir que una ruta tiene hijos o vistas anidadas?
+children
+14.
+¿El objetivo Code Spliting es aumentar el peso de la aplicación?
+Falso
+15.
+¿Qué elementos son comunes que se compartan por medio de un SharedModule?
+Componentes, pipes y directivas
