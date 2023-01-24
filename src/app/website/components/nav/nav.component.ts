@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Category } from 'src/app/models/product.model';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { CategoriesService } from 'src/app/services/categories.service';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({
@@ -12,15 +15,23 @@ export class NavComponent implements OnInit {
   showMenu = false;
   counter = 0;
   profile: User | null = null;
+  categories: Category[] = [];
 
   constructor(
     private storeService: StoreService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
+    private categoriesService: CategoriesService
   ) {}
 
   ngOnInit(): void {
     this.storeService.myCart$.subscribe((products) => {
       this.counter = products.length;
+    });
+    this.getAllCategories();
+
+    this.authService.user$.subscribe((data) => {
+      this.profile = data;
     });
   }
 
@@ -36,15 +47,30 @@ export class NavComponent implements OnInit {
     // });
 
     this.authService
-      .loginAndGetProfile('ricardo@mail.com', '123456')
-      .subscribe((user) => {
-        this.profile = user;
+      .loginAndGetProfile('admin@mail.com', 'admin123')
+      .subscribe(() => {
+        this.router.navigate(['/profile']);
       });
+      // .subscribe((user) => {
+      //   this.profile = user;
+      // });
   }
 
   getProfile() {
     this.authService.profile().subscribe((rta) => {
       this.profile = rta;
     });
+  }
+
+  getAllCategories() {
+    this.categoriesService.getAll().subscribe((data) => {
+      this.categories = data;
+    });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.profile = null;
+    this.router.navigate(['/home']);
   }
 }

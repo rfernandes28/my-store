@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { switchMap, zip } from 'rxjs';
 import {
   CreateProductDTO,
@@ -13,7 +13,7 @@ import { StoreService } from 'src/app/services/store.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   constructor(
     private storeService: StoreService,
     private productService: ProductsService
@@ -21,7 +21,15 @@ export class ProductsComponent implements OnInit {
     this.myShoppingCart = this.storeService.getShoppingCart();
   }
 
-  products: Product[] = [];
+  @Input() products: Product[] = [];
+  @Input()
+  set productId(id: string | null) {
+    if (id) {
+      this.onShowDetail(id);
+    }
+  }
+
+  @Output() loadMore = new EventEmitter();
   myShoppingCart: Product[] = [];
   total: number = 0;
   today = new Date();
@@ -81,10 +89,6 @@ export class ProductsComponent implements OnInit {
   //   },
   // ];
 
-  ngOnInit(): void {
-    this.loadMore();
-  }
-
   onAddToShoppingCart(product: Product) {
     this.storeService.addProduct(product);
     this.total = this.storeService.getTotal();
@@ -99,11 +103,13 @@ export class ProductsComponent implements OnInit {
 
   onShowDetail(id: string) {
     this.statusDetail = 'loading';
+    if (!this.showProductDetail) {
+      this.showProductDetail = true;
+    }
     this.productService.getProduct(id).subscribe({
       next: (data) => {
         this.productChosen = data;
         this.statusDetail = 'success';
-        this.toggleProductDetail();
       },
       error: (error) => {
         this.statusDetail = 'error';
@@ -176,12 +182,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  loadMore() {
-    this.productService
-      .getAllProducts(this.limit, this.offset)
-      .subscribe((data) => {
-        this.products = this.products.concat(data);
-        this.offset += this.limit;
-      });
+  onLoadMore() {
+    this.loadMore.emit();
   }
 }
